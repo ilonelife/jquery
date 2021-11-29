@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<htm>
+    <head>
+        <title>jquery</title>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+
+    </head>
+    <style>
+        div {
+            background-color: tomato;
+            display: inline-block;
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+            border: 2px solid black;
+        }
+
+        .type1 {
+            width: 600px;
+            height: 200px;
+        }
+
+        .type2 {
+            width: 200px;
+            height: 600px;
+        }
+
+        .div1 {
+            background-color: blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            line-height: 600px;
+        }
+
+        .div2 {
+            background-color: yellow;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            line-height: 200px;
+        }
+
+        .div3 {
+            background-color: red;
+            position: absolute;
+            top: 200px;
+            right: 0;
+            z-index: 2;
+            line-height: 600px;
+        }
+
+        .div4 {
+            background-color: green;
+            position: absolute;
+            top: 600px;
+            left: 0;
+            z-index: 1;
+            line-height: 200px;
+        }
+
+        .div5 {
+            background-color: white;
+            overflow: auto;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 400px;
+            height: 400px;
+            z-index: 1;
+        }
+    </style>
+    <body></body>
+    <script>
+
+        var body1 = "<div class='type2 div1'>1</div>";
+        var body2 = "<div class='type1 div2'>2</div>";
+        var body3 = "<div class='type2 div3'>3</div>";
+        var body4 = "<div class='type1 div4'>4</div>";
+        var image = "<div class='div5'><img src='1.jpeg'></div>";
+
+        $(function () {
+
+            $("body").append(body1);
+            $("body").append(body2);
+            $("body").append(body3);
+            $("body").append(body4);
+            $("body").append(image);
+
+        });
+    </script>
+</htm>
