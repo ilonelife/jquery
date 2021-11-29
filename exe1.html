@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<htm>
+    <head>
+        <title>jquery</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    </head>
+    <style>
+
+        #btn {
+            visibility: hidden;
+            padding: 20px;
+        }
+
+        #text {
+            align-content: center;
+        }
+
+        #red {
+            background-color: red;
+        }
+
+        #blue {
+            background-color: blue;
+        }
+
+        #green {
+            background-color: green;
+        }
+    </style>
+
+        <div id="text">안녕하세요</div>
+        <br/>
+        <br/>
+        
+        <div id="btn">
+            <button id="red">빨강</button>
+            <button id="blue">파랑</button>
+            <button id="green">초록</button>
+        </div>
+
+    <script>
+
+        $(function(){
+
+            var input = prompt("실습");
+            if(input == "") {
+                alert("텍스트를 입력해 주세요");
+            }
+            $("#text").text(input);
+
+            $("#btn").css("visibility", "visible");
+
+            $("#red").on("click", function() {
+                alert("빨강색으로 바뀝니다");
+                $("#text").css("color", "red");
+            })
+
+            $("#blue").on("click", function() {
+                alert("파랑색으로 바뀝니다");
+                $("#text").css("color", "blue");
+            })
+
+            $("#green").on("click", function() {
+                alert("초록색으로 바뀝니다");
+                $("#text").css("color", "green");
+            })
+
+        });
+
+    </script>
+</htm>
