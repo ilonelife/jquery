@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<htm>
+    <head>
+        <title>jquery</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    </head>
+    <style>
+
+        #btn {
+            padding: 20px;
+        }
+
+        #text {
+            font-size: 5rem;
+        }
+
+        #red {
+            background-color: red;
+        }
+
+        #blue {
+            background-color: blue;
+        }
+
+        #green {
+            background-color: green;
+        }
+
+        #home {
+            text-align: center;
+            padding-top: 100px;
+        }
+    </style>
+
+    <div id="home">
+        <div id="text">안녕하세요</div>
+        <br/>
+        <br/>
+        
+        <div id="btn">
+            <button>red</button>
+            <button>blue</button>
+            <button>green</button>
+        </div>
+    </div>
+    <script>
+        
+        $("button").css("display", "none");
+        var input = '';
+
+        function firstask() {
+            input = prompt("값을 입력해 주세요 ");
+            if (input == "") {
+                alert("값을 입력해 주세요 ");
+                firstask();
+            } else {
+                $("#text").text(input);
+                $("button").css("display", "");
+            }
+        }
+
+        $(function(){
+            firstask();
+
+            $("button").on("click", function() {
+                let color = $(this).html();
+                alert(color + "으로 변경됩니다 ");
+                $("#text").css("color", color);
+            })
+
+        });
+
+    </script>
+</htm>
