@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sample5</title>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+        </script>
+    </head>
+    <style>
+            .main {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+
+            }
+            .sub {
+                display: block;
+                float: left;
+                width: 200px;
+                height: 50px;
+                cursor: pointer;
+                line-height: 50px;
+                text-indent: 10px;
+
+            }
+
+            .off {
+                border: 1px solid #000;
+                color: #ccc;
+                background-color: #000;
+            }
+
+            .on {
+                border: 1px solid #000;
+                border-bottom: 0 solid #000;
+                color: #000;
+                background-color: #fff;
+
+    </style>
+
+    <body>
+
+        <div class="main">
+            <button class="sub off" >html</button>
+            <button class="sub off" >css</button>
+            <button class="sub off" >javascript</button>
+        </div>
+
+    </body>
+
+    <script>
+
+        $(function() {
+            $(".sub").on("click", function(){
+                $(".sub").attr("class", "sub off");
+                $(this).attr("class", "sub on");
+            })
+        })
+
+    </script>
+
+</html>
