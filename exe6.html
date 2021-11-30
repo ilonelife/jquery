@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+        <style>
+            tr {
+                text-align: center;
+            }
+
+            #btn {
+                align-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table border="1" width="100%">
+                <tr height="50px">
+                    <td><input type="checkbox" id="master" name="check">확인</td>
+                    <td>제목</td>
+                    <td>글쓴시간</td>
+                </tr>
+                <tr height="50px">
+                    <td>
+                        <input type="checkbox" class="slave" value="1">
+                    </td>
+                    <td>
+                        111111
+                    </td>
+                    <td>
+                        11:11:00
+                    </td>
+                </tr>
+                <tr height="50px">
+                    <td>
+                        <input type="checkbox" class="slave" value="2">
+                    </td>
+                    <td>
+                        222222
+                    </td>
+                    <td>
+                        11:11:00
+                    </td>
+                </tr>
+                <tr height="50px">
+                    <td>
+                        <input type="checkbox" class="slave" value="3">
+                    </td>
+                    <td>
+                        3333333
+                    </td>
+                    <td>
+                        11:11:00
+                    </td>
+                </tr>
+                <tr height="50px">
+                    <td>
+                        <input type="checkbox" class="slave" value="4">
+                    </td>
+                    <td>
+                        444444
+                    </td>
+                    <td>
+                        11:11:00
+                    </td>
+                </tr>
+                <tr height="50px">
+                    <td>
+                        <input type="checkbox" class="slave" value="5">
+                    </td>
+                    <td>
+                        55555
+                    </td>
+                    <td>
+                        11:11:00
+                    </td>
+                </tr>
+            </table><br/>
+            <button id="btn">로그</button>
+        </div>
+    </body>
+
+    <script>
+        $(function() {
+            $("#master").click(function(){
+                if($(this).is(':checked')) {
+                    $('.slave').prop('checked', true);
+                } else {
+                    $('.slave').prop('checked', false);
+                }
+            });
+
+            $("#btn").click(function() {
+                $(".slave").each(
+                    function() {
+                        if($(this).is(":checked")) {
+                            console.log($(this).val());
+                        }
+                    }
+                )
+            });
+        });
+
+    </script>
+</html>
