@@ -48,6 +48,8 @@
             <button class="sub off" >javascript</button>
         </div>
 
+        <p>test......</p>
+
     </body>
 
     <script>
@@ -58,6 +60,12 @@
                 $(this).attr("class", "sub on");
             })
         });
+
+        $(document).ready(function() {
+            $("p").click(function() {
+                $(this).hide();
+            })
+        })
 
     </script>
 

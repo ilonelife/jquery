@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+    </script>
+    <title>Document</title>
+</head>
+
+    <input type="checkbox" name="mycheck" value="1">test1 <br/>
+    <input type="checkbox" name="mycheck" value="2">test2 <br/>
+    <input type="checkbox" name="mycheck" value="3">test3 <br/>
+    <input type="checkbox" name="mycheck" value="4">test4 <br/>
+    <input type="checkbox" name="mycheck" value="5">test5 <br/>
+
+    <button id="btn1">전체갯수 </button>
+    <button id="btn2">체크된 갯수 </button>
+    <button id="btn3">전체 체크하기 </button>
+    <button id="btn4">전체 해제하기 </button>
+
+</body>
+<script>
+    $(function() {
+
+        $("#btn1").click(function() {
+            let count = $('input:checkbox[name=mycheck]').length;
+            alert('전체 갯수는 ' + count + '개 입니다');
+        });
+
+        $("#btn2").click(function() {
+            let count = $('input:checkbox[name=mycheck]:checked').length;
+            alert('체크된 갯수는 ' + count + '개 입니다');
+        });
+
+        $("#btn3").click(function() {
+            $('input:checkbox[name=mycheck]').attr("checked", true);
+        });
+
+        $("#btn4").click(function() {
+            $('input:checkbox[name=mycheck]').attr("checked", false);
+        });
+    });
+
+</script>
+</html>
