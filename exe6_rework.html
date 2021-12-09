@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+        </script>
+    <style>
+        tr {
+            text-align: center;
+            height: "50px";
+        }
+
+        .color {
+            background-color: orange;
+        }
+
+        .btn {
+            text-align: center;
+        }
+    </style>
+    <title>연습 1</title>
+</head>
+
+<body>
+    <table border="1" width="100%">
+        <tr class="color">
+            <td><input type="checkbox" id="master" name="check">확인</td>
+            <td>제목</td>
+            <td>시간</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="slave" value="1"></td>
+            <td>안녕하세요 </td>
+            <td>2021. 12. 09</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="slave" value="2"></td>
+            <td>좋은 아침 </td>
+            <td>2021. 12. 10</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="slave" value="3"></td>
+            <td>자바스크립트 </td>
+            <td>2021. 12. 11</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="slave" value="4"></td>
+            <td>웹 프로그래밍 </td>
+            <td>2021. 12. 12</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="slave" value="5"></td>
+            <td>라이브러리 </td>
+            <td>2021. 12. 14</td>
+        </tr>
+    </table>
+    <br />
+    <div class="btn">
+        <button id="btn">로그</button>
+    </div>
+
+</body>
+<script>
+    $(function() {
+        $("#master").click(function() {
+            if ($(this).is(':checked')) {
+                $(".slave").prop('checked', true);
+            } else {
+                $(".slave").prop('checked', false);
+            }
+        });
+
+        $("#btn").click(function() {
+            $(".slave").each(function() {
+                if ($(this).is(":checked")) {
+                    console.log($(this).val());
+                }
+            });
+        });
+    })
+
+</script>
+
+</html>
