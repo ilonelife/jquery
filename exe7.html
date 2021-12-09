@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+        </script>
+        <style>
+            #move {
+                position: relative;
+
+
+                left: 300px;
+                top: 100px;
+            }
+
+        </style>
+        <title>game 1</title>
+    </head>
+    <body>
+
+
+
+        <div>
+            <img id="move" src="https://cdn.pixabay.com/photo/2021/10/19/13/12/squid-game-6723533_960_720.png", width="70" >
+        <div>
+        <br />
+        <p>
+            <button id="left">left</button>
+            <button id="right">right</button>
+            <button id="up">up</button>
+            <button id="down">down</button>
+        </p>
+        
+    </body>
+    <script>
+
+        var timer = 0;
+
+        function callConsole1 () {
+            console.log('1111');
+        }
+
+        function callConsole2 () {
+            timer++;
+            console.log(timer);
+        } 
+
+        setTimeout(callConsole1, 3000);
+
+      //  setInterval(callConsole2, 3000);
+
+        $(function() {
+            $("#left").on('click', function() {
+                $("#move").css("left", "-=50px");   //animate({left: '200px'});
+            });
+            $("#right").on('click', function() {
+                $("#move").css("left", "+=50px");
+            });
+            $("#up").on('click', function() {
+                $("#move").css("top", "-=50px");
+            });
+            $("#down").on('click', function() {
+                $("#move").css("top", "+=50px");
+            });
+
+            $("body").keydown(function(event) {
+                if(event.keyCode == 38) {
+                    $("#move").css("top", "-=50px");   // up
+                }
+                if(event.keyCode == 40) {
+                    $("#move").css("top", "+=50px");   // down
+                }
+                if(event.keyCode == 37) {
+                    $("#move").css("left", "-=50px");   // left
+                }
+                if(event.keyCode == 39) {
+                    $("#move").css("left", "+=50px");   // right
+                }
+            })
+        });
+    </script>
+</html>
