@@ -1,63 +1,107 @@
-
 <html lang="en">
-    <head>
-        <script
-            src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-            crossorigin="anonymous">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
-        <style>
-            #mario {
-                width: 100px;
-            }
+    <style>
+        #mario {
+            width: 100px;
+        }
 
-            #bg {
-                border: 1px solid #000;
-                width: 100%;
-                height: 100%;
-                position: relative;
-            }
+        #gunba {
+            width: 50px;
+            ;
+        }
 
-            #mario_block {
-                position: absolute;
-                left: 10px;
-                bottom: 10px;
-            }
+        #bg {
+            border: 1px solid #000;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
 
-        </style>
-        <title>Document</title>
-    </head>
-    <body>
+        #mario_block {
+            position: absolute;
+            left: 50px;
+            bottom: 10px;
+        }
 
-        <div id="bg">
+        #gunba_block {
+            position: absolute;
+            display: none;
+            right: 10px;
+            bottom: 20px;
+        }
 
-            <div id="mario_block"><img id="mario" src="man.gif"></div>
+        #background {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <title>Document</title>
+</head>
 
-        </div>
-        
-    </body>
+<body>
 
-    <script>
+    <div id="bg">
 
-        $(function() {
+        <img id="background" src="bg.jpeg">
 
-            var jumping = false;
+        <div id="mario_block"><img id="mario" src="man.gif"></div>
 
-            $("body").keydown(function() {
+        <div id="gunba_block"><img id="gunba" src="gb.gif"></div>
 
-               // console.log(event.keyCode);
+    </div>
 
-                if(event.keyCode == "32" && jumping == false) {
-                    jumping = true;
-                    $("#mario_block").animate({"bottom": "200px"}, 500).animate({"bottom": "10px"}, 500, function() {
-                        jumping = false;
-                    }); 
-                      // up
-                }
-                
+</body>
+
+<script>
+
+    $(function () {
+
+        var jumping = false;
+
+        function gunba_start() {
+
+            let random_speed = Math.floor(Math.random() * 1000 + 2000);
+            $("#gunba_block").show();
+
+            $("#gunba_block").animate({ "left": "0px" }, random_speed, function () {
+                $("#gunba_block").css("left", "");
+                $("#gunba_block").css("right", "10px");
+                $("#gunba_block").hide();
+                setTimeout(gunba_start, random_speed - 1000);
             });
+        }
 
-        });
+        function mario_down() {
+            var beat = Number($("#gunba_block").css("left").replace("px", ""));
 
-    </script>
+            if( beat <= 130 && beat > 100 && jumping == false) {
+                alert('마리오 사망');
+            }
+        }
+
+
+        $(function () {
+            $("body").keydown(function (event) {
+                // console.log(event.keyCode);
+                if (event.keyCode == "32" && jumping == false) {
+                    jumping = true;
+                    $("#mario_block").animate({ "bottom": "200px" }, 500).animate({ "bottom": "10px" }, 500, function () {
+                        jumping = false;
+                    });   // up
+                }
+            
+            });
+            //gunba_start();
+            setTimeout(gunba_start, 1000);
+            setInterval(mario_down, 10);
+        })
+      //  setTimeout(gunba_start, 1000);
+    })
+
+</script>
+
 </html>
