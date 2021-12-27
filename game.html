@@ -53,10 +53,7 @@
         }
 
         #start_mario {
-            position: absolute;
-            width: 100px;
-            left: 200px;
-            top: 50px;
+            height: 30%;
         }
 
         #gumba_block {
@@ -108,36 +105,33 @@
             text-align: center;
         }
 
-        #startBtn {
-            position: absolute;
-            left: 450px;
-            top: 300px;
-            text-align: center;
-        }
+
     </style>
-    <title>Document</title>
+    <title>Maria Game</title>
 </head>
 
 <body>
 
     <div id="start">
-        <h1 id="start_title">!! 마리오 게임 !!</h1>
-        <p>개발자 :  이 일 원</p>
-        <img id="start_mario" src="man.gif">
-        <button id="startBtn" type="button">
-            <h1>게임 시작</h1>
-        </button>
+        <br/><br/>
+            <h1>!! 마리오 게임 !!</h1>
+            <p>개발자 :  이 일 원</p>
+            <img id="start_mario" src="man.gif">
+            <br/><br/><br/>
+            <button id="startBtn" type="button">
+                <h3>게임 시작</h3>
+            </button>
     </div>
 
 
     <div id="main">
-        <div id="dashboard">
-            <p id="score"></p>
+        <div id="score"> 점수 : 
         </div>
         <img id="background" src="bg.jpeg">
         <div id="mario_block"><img id="mario" src="man.gif"></div>
         <div id="gumba_block"><img id="gumba" src="gb.gif"></div>
         <div id="killer_block"><img id="killer" src="killer.jpeg"></div>
+
     </div>
 
     <div id="gameover">
@@ -149,131 +143,132 @@
 
 </body>
 
-<script>
-    var jump = false;
-    var killer = false;
-    var score = 0;
+    <script>
+        var jump = false;
+        var killer = false;
+        var score = 0;
 
-    function gumba_start() {
-        $("#mario_block").show(100);
-        $jump = false;
+        function gumba_start() {
+            $("#mario_block").show(100);
+            $jump = false;
 
-        let random_speed = Math.floor(Math.random() * 1000 + 2000);
-        $("#gumba_block").show();
+            let random_speed = Math.floor(Math.random() * 1000 + 2000);
+            $("#gumba_block").show();
 
-        $("#gumba_block").animate({
-            "left": "0px"
-        }, random_speed, function () {
+            $("#gumba_block").animate({
+                "left": "0px"
+            }, random_speed, function () {
 
-            let alive = $("#mario_block").css("display");
-            // console.log(alive);  
+                let alive = $("#mario_block").css("display");
+                // console.log(alive);  
 
-            if (alive == "block") {   // none 이면 살아 있고, block 이면 죽음
-                score = score + 100;
-            }
+                if (alive == "block") {   // none 이면 살아 있고, block 이면 죽음
+                    score = score + 100;
+                }
 
-            $("#gumba_block").css("left", "");
-            $("#gumba_block").css("right", "10px");
-            $("#gumba_block").hide();
-            setTimeout(gumba_start, random_speed - 1000);
-        });
-    }
-
-    function killer_start() {
-        $("#killer_block").show(30);
-        killer = true;
-        $("#killer_block").animate({ "left": "950px" }, 1000, function () {
-            killer = false;
-            $("#killer_block").hide();
-            $("#killer_block").css("left", "50px");
-        })
-    }
-
-    function mario_down() {
-        var beat = Number($("#gumba_block").css("left").replace("px", ""));
-        if (beat <= 110 && jump == false) {
-            $("#mario_block").hide(500);
-            $jump = true;
-            score = 0;
-            game_over();
+                $("#gumba_block").css("left", "");
+                $("#gumba_block").css("right", "10px");
+                $("#gumba_block").hide();
+                setTimeout(gumba_start, random_speed - 1000);
+            });
         }
-    }
 
-    function game_over() {
-        $("#main").hide();
-        $("#gameover").show();
-
-    }
-
-    function gumba_down() {
-        var beat1 = Number($("#gumba_block").css("left").replace("px", ""));
-        var beat2 = Number($("#killer_block").css("left").replace("px", ""));
-        let random_speed = Math.floor(Math.random() * 1000);
-
-        if (beat1 - beat2 < 50 && killer == true) {
-            score = score + 150;
-            killer = false;
-            $("#killer_block").hide();
-            $("#killer_block").css("left", "50px");
-            $("#gumba_block").stop();
-
-            $("#gumba_block").css("left", "");
-            $("#gumba_block").css("right", "10px");
-            $("#gumba_block").hide();
-            setTimeout(gumba_start, random_speed - 1000);
+        function killer_start() {
+            $("#killer_block").show(30);
+            killer = true;
+            $("#killer_block").animate({ "left": "950px" }, 1000, function () {
+                killer = false;
+                $("#killer_block").hide();
+                $("#killer_block").css("left", "50px");
+            })
         }
-    }
 
-    function score_count() {
-        let result = "<h1>점수 :  " + score + "  점 </h1>";
-        $("#score").html(result);
-    }
-
-    function game_start() {
-        $("body").keydown(function (event) {
-
-            if (event.keyCode == "32" && jump == false) {
-                jump = true;
-                $("#mario_block")
-                    .animate({
-                        "bottom": "200px"
-                    }, 500)
-                    .animate({
-                        "bottom": "10px"
-                    }, 500, function () {
-                        jump = false;
-                    });
+        function mario_down() {
+            var beat = Number($("#gumba_block").css("left").replace("px", ""));
+            if (beat <= 110 && jump == false) {
+                $("#mario_block").hide(500);
+                $jump = true;
+                score = 0;
+                game_over();
             }
+        }
 
-            if (event.keyCode == "13" && killer == false) {
-                killer_start();
+        function game_over() {
+            $("#main").hide();
+            $("#gameover").show();
+
+        }
+
+        function gumba_down() {
+            var beat1 = Number($("#gumba_block").css("left").replace("px", ""));
+            var beat2 = Number($("#killer_block").css("left").replace("px", ""));
+            let random_speed = Math.floor(Math.random() * 1000);
+
+            if (beat1 - beat2 < 50 && killer == true) {
+                score = score + 150;
+                killer = false;
+                $("#killer_block").hide();
+                $("#killer_block").css("left", "50px");
+                $("#gumba_block").stop();
+
+                $("#gumba_block").css("left", "");
+                $("#gumba_block").css("right", "10px");
+                $("#gumba_block").hide();
+                setTimeout(gumba_start, random_speed - 1000);
             }
-        })
+        }
 
-        setTimeout(gumba_start, 1000);
-        setInterval(mario_down, 10);
-        setInterval(gumba_down, 10);
-        setInterval(score_count, 10);
-    }
+        function score_count() {
+            let result = "<h1>점수 :  " + score + "  점 </h1>";
+            $("#score").html(result);
+        }
 
-    $(function () {
+        function game_start() {
 
-        $("#startBtn").click(function() {
             $("#start").hide();
             $("#main").show();
             $("#gameover").hide();
-            game_start();
+
+            score = 0;
+
+            setTimeout(gumba_start, 1000);
+            setInterval(mario_down, 10);
+            setInterval(gumba_down, 10);
+            setInterval(score_count, 10);
+        }
+
+        $(function () {
+
+            $("#startBtn").click(function() {
+                game_start();
+            })
+
+            $("#restartBtn").click(function() {
+                $("#main").show();
+                $("#gameover").hide();
+                game_start();
+            })
+
+            $("body").keydown(function (event) {
+                // 스페이스 키 누르고 
+                if (event.keyCode == "32" && jump == false) {
+                    jump = true;
+                    $("#mario_block")
+                        .animate({
+                            "bottom": "200px"
+                        }, 500)
+                        .animate({
+                            "bottom": "10px"
+                        }, 500, function () {
+                            jump = false;
+                        });
+                }
+                // Enter 키 누르고
+                if (event.keyCode == "13" && killer == false) {
+                    killer_start();
+                }
+            })
         })
-
-
-
-        $("#restartBtn").click(function() {
-            $("#main").show();
-            $("#gameover").hide();
-            game_start();
-        })
-
-    })
-</script>
+    </script>
 
 </html>

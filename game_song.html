@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>mario</title>
+        <title>Mario Game</title>
 
         <script
             src="https://code.jquery.com/jquery-3.6.0.js"
@@ -34,20 +34,20 @@
             height: 100%;
         }
 
-        #start {
-            margin: auto;
-            border: 1px solid #000;
-            width: 950px;
+        #game_start {
+            width: 100%;
             height: 100%;
             position: relative;
+            text-align: center;
         }
 
-        #close {
+        #game_over {
             margin: auto;
             border: 1px solid #000;
             width: 950px;
             height: 100%;
             position: relative;
+            text-align: center;
         }
         #mario_block {
             position: absolute;
@@ -73,6 +73,14 @@
         }
     </style>
     <body>
+        <div id="game_start">
+            <h1>!! 마리오 게임 !!</h1>
+            <br/>
+            <div>개발자 : 이 일 원</div>
+            <img src="man.gif">
+            <br/><br/><br/>
+            <button id="startBtn"><h3>시작</h3></button>
+        </div>
 
         <div id="main">
             <img id="background" src="bg.jpeg">
@@ -81,20 +89,13 @@
             <div id="killer_block"><img id="killer" src="killer.jpeg"></div>
             <div id="score">점수 :
             </div>
-
         </div>
 
-        <div id="close">
-            게임오버<br/>
-            <button class="start">게임다시하기</button>
-        </div>
-
-        <div id="start">
-            자바스크립트 마리오
-            <br/>
-            개발자 이일원
-            <br/>
-            <button class="start">게임시작</button>
+        <div id="game_over">
+            <br/><br/>
+            <h1>게임종료</h1>
+            <br/><br/>
+            <button id="restartBtn"><h3>재시작</h3></button>
         </div>
 
     </body>
@@ -103,33 +104,24 @@
         var killer = false;
         var score = 0;
 
-        function start() { //시작화면
-
-            $("#start").show();
-            $("#main").hide();
-            $("#close").hide();
-
+        var marioInterval;
+        var gumbaInterval;
+        var scoreInterval;
+        
+        function start() {
+            $("#game_start").show;
+            $("#main").hide;
+            $("#game_over").hide;
         }
 
-        function close() { // 게임오버 화면
-
-            $("#start").hide();
-            $("#main").hide();
-            $("#close").show();
-        }
-
-        function game() { //게임중 화면
-
-            $("#start").hide();
-            $("#main").show();
-            $("#close").hide();
+        function game_start() { //게임중 화면
 
             score = 0;
 
             setTimeout(gumba_start, 1000);
-            setInterval(mario_down, 10);
-            setInterval(gumba_down, 10);
-            setInterval(set_score, 10);
+            marioInterval = setInterval(mario_down, 10);
+            gumbaInterval = setInterval(gumba_down, 10);
+            scoreInterval = setInterval(set_score, 10);
         }
 
         function gumba_start() {
@@ -165,8 +157,8 @@
                 killer = false;
                 $("#killer_block").hide();
                 $("#killer_block").css("left", "50px");
-            })
-
+                $("#mario").prop('src', 'man.gif');
+            });
         }
 
         function set_score() {
@@ -176,11 +168,22 @@
 
         function mario_down() {
             var beat = Number($("#gumba_block").css("left").replace("px", ""));
+            console.log(beat);
             if (beat <= 110 && jump == false) {
                 $("#mario_block").hide();
                 $jump = true;
                 score = 0;
-                close();
+
+                $("#gumba_block").stop();
+                $("#gumba_block").css("left", "");
+                $("#gumba_block").css("right", "10px");
+
+                clearInterval(marioInterval);
+                clearInterval(gumbaInterval);
+                clearInterval(scoreInterval);
+                
+                $("#main").hide();
+                $("#game_over").show();
             }
         }
 
@@ -189,6 +192,7 @@
             var beat2 = Number($("#killer_block").css("left").replace("px", ""));
             let random_speed = Math.floor(Math.random() * 1000);
 
+            // 군바와 킬러가 충돌했다면
             if (beat1 - beat2 < 50 && killer == true) {
                 score = score + 150;
                 killer = false;
@@ -196,7 +200,7 @@
                 $("#killer_block").css("left", "50px");
 
                 $("#gumba_block").stop();
-
+            
                 $("#gumba_block").css("left", "");
                 $("#gumba_block").css("right", "10px");
                 $("#gumba_block").hide();
@@ -208,8 +212,19 @@
 
             start();
 
-            $(".start").click(function () {
-                game();
+            $("#startBtn").click(function () {
+                $("#game_start").hide();
+                $("#game_over").hide();
+                $("#main").show();
+
+                game_start();
+            })
+
+            $("#restartBtn").click(function () {
+                $("#game_over").hide();
+                $("#main").show();
+
+                game_start();
             })
 
             $("body").keydown(function (event) {
